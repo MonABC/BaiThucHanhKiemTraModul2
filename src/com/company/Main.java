@@ -35,10 +35,8 @@ public class Main {
                     timKiem(quanLiDanhBa);
                     break;
                 }
-                case 6:{
-
-                    ghiFile(quanLiDanhBa);
-                    System.out.println("ghi thành công");
+                case 6: {
+                    ghiFli(quanLiDanhBa);
                     break;
 
                 }
@@ -49,8 +47,17 @@ public class Main {
             }
         } while (luaChon != 0);
     }
+
+    private static void ghiFli(QuanLiDanhBa quanLiDanhBa) {
+        try {
+            quanLiDanhBa.writeFile("danhba.txt");
+        } catch (IOException e) {
+        }
+        System.out.println("ghi thành công");
+    }
+
     private static void docFile(QuanLiDanhBa quanLiDanhBa) {
-        File file= new File("danhba.txt");
+        File file = new File("danhba.txt");
         if (file.exists()) {
 
             try {
@@ -59,17 +66,10 @@ public class Main {
             } catch (IOException | ClassNotFoundException e) {
             }
         } else {
-            System.out.println("file không tồn tại");
+            System.err.println("file không tồn tại");
         }
     }
 
-    private static void ghiFile(QuanLiDanhBa quanLiDanhBa) {
-        try {
-            quanLiDanhBa.writeFile("danhba.txt");
-        } catch (IOException e) {
-
-        }
-    }
 
     private static void timKiem(QuanLiDanhBa quanLiDanhBa) {
         System.out.println("tìm theo số điện thoại");
@@ -77,10 +77,10 @@ public class Main {
         int sdt = scanner.nextInt();
         int viTri = quanLiDanhBa.timViTriTheoSoDienThoai(sdt);
         if (viTri != -1) {
-            System.out.println("thông tin theo số điện thoại: " + sdt + " là: ");
+            System.err.println("thông tin theo số điện thoại: " + sdt + " là: ");
             quanLiDanhBa.timKiemTheoSdt(viTri);
         } else {
-            System.out.println("không tìm thấy số điện thoại này trong Danh Bạ");
+            System.err.println("không tìm thấy số điện thoại này trong Danh Bạ");
         }
     }
 
@@ -92,7 +92,7 @@ public class Main {
         if (kiemTra) {
             System.out.println("xóa thành công");
         } else {
-            System.out.println("xóa lỗi do không có sdt này trong danh bạ");
+            System.err.println("xóa lỗi do không có sdt này trong danh bạ");
         }
     }
 
@@ -107,7 +107,7 @@ public class Main {
             System.out.println("chỉnh sửa thành công");
 
         } else {
-            System.out.println("không tìm thấy số điện thoại này trong danh bạ");
+            System.err.println("không tìm thấy số điện thoại này trong danh bạ");
         }
     }
 
@@ -121,14 +121,12 @@ public class Main {
     private static void hienThiThongTinDanhBa(QuanLiDanhBa quanLiDanhBa) {
         int kiemTraDanhBa = quanLiDanhBa.checkSize();
         if (kiemTraDanhBa == 0) {
-            System.out.println("danh bạ rỗng");
+            System.err.println("danh bạ rỗng");
         } else {
             System.out.println("hiển thị danh bạ");
             quanLiDanhBa.hienThiDanhBa();
         }
     }
-
-
 
     private static void menu() {
         System.out.println("-----MENU-----");
